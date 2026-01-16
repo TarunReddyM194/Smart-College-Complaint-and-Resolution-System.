@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register Complaint</title>
+</head>
+<body>
+    <h2>Student Complaint Form</h2>
+
+    <form method="POST" action="/submit_complaint">
+
+        <label>Student Name</label><br>
+        <input type="text" name="student_name" required><br><br>
+
+        <label>Email</label><br>
+        <input type="email" name="student_email" required><br><br>
+
+        <label>Complaint Type</label><br>
+        <select name="complaint_type" required>
+            <option value="Infrastructure">Infrastructure</option>
+            <option value="Faculty">Faculty</option>
+            <option value="Hostel">Hostel</option>
+            <option value="Transport">Transport</option>
+        </select><br><br>
+
+        <label>Complaint Description</label><br>
+        <textarea name="complaint_description" required></textarea><br><br>
+
+        <button type="submit">Submit Complaint</button>
+    </form>
+</body>
+</html>
