@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, session
 import mysql.connector
 
 app = Flask(__name__)
+app.secret_key = "adminsecret"
 
 db = mysql.connector.connect(
     host="localhost",
@@ -44,6 +45,45 @@ def submit_complaint():
     db.commit()
 
     return "Complaint submitted successfully"
+
+@app.route("/admin")
+def admin_dashboard():
+    if not session.get("admin_logged_in"):
+        return redirect("/login")
+
+    cursor.execute("SELECT * FROM complaints")
+    complaints = cursor.fetchall()
+    return render_template("dashboard.html", complaints=complaints)
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+@app.route("/admin_login", methods=["POST"])
+def admin_login():
+    username = request.form["username"]
+    password = request.form["password"]
+
+    if username == "admin" and password == "admin123":
+        session["admin_logged_in"] = True
+        return redirect("/admin")
+    else:
+        return "Invalid username or password"
+    
+@app.route("/resolve/<int:complaint_id>", methods=["POST"])
+def resolve_complaint(complaint_id):
+    if not session.get("admin_logged_in"):
+        return redirect("/login")
+
+    cursor.execute(
+        "UPDATE complaints SET status='Resolved' WHERE complaint_id=%s",
+        (complaint_id,)
+    )
+    db.commit()
+
+    return redirect("/admin")
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

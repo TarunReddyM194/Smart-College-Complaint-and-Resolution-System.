@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<h2>Admin Dashboard - Complaints List</h2>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>ID</th>
+        <th>Student Name</th>
+        <th>Email</th>
+        <th>Complaint Type</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+
+    {% for complaint in complaints %}
+    <tr>
+        <td>{{ complaint[0] }}</td>
+        <td>{{ complaint[1] }}</td>
+        <td>{{ complaint[2] }}</td>
+        <td>{{ complaint[3] }}</td>
+        <td>{{ complaint[4] }}</td>
+        <td>{{ complaint[5] }}</td>
+
+        <td>
+            {% if complaint[5] == 'Pending' %}
+            <form method="POST" action="/resolve/{{ complaint[0] }}">
+                <button type="submit">Resolve</button>
+            </form>
+            {% else %}
+                Resolved
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

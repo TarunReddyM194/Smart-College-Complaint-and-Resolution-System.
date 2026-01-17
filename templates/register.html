@@ -2,30 +2,35 @@
 <html>
 <head>
     <title>Register Complaint</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h2>Student Complaint Form</h2>
 
-    <form method="POST" action="/submit_complaint">
+    <div class="container">
+        <h2>Student Complaint Form</h2>
 
-        <label>Student Name</label><br>
-        <input type="text" name="student_name" required><br><br>
+        <form method="POST" action="/submit_complaint">
 
-        <label>Email</label><br>
-        <input type="email" name="student_email" required><br><br>
+            <label>Student Name</label>
+            <input type="text" name="student_name" required>
 
-        <label>Complaint Type</label><br>
-        <select name="complaint_type" required>
-            <option value="Infrastructure">Infrastructure</option>
-            <option value="Faculty">Faculty</option>
-            <option value="Hostel">Hostel</option>
-            <option value="Transport">Transport</option>
-        </select><br><br>
+            <label>Email</label>
+            <input type="email" name="student_email" required>
 
-        <label>Complaint Description</label><br>
-        <textarea name="complaint_description" required></textarea><br><br>
+            <label>Complaint Type</label>
+            <select name="complaint_type" required>
+                <option value="Infrastructure">Infrastructure</option>
+                <option value="Faculty">Faculty</option>
+                <option value="Hostel">Hostel</option>
+                <option value="Transport">Transport</option>
+            </select>
 
-        <button type="submit">Submit Complaint</button>
-    </form>
+            <label>Complaint Description</label>
+            <textarea name="complaint_description" rows="4" required></textarea>
+
+            <button type="submit">Submit Complaint</button>
+        </form>
+    </div>
+
 </body>
 </html>
