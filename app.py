@@ -51,9 +51,18 @@ def admin_dashboard():
     if not session.get("admin_logged_in"):
         return redirect("/login")
 
-    cursor.execute("SELECT * FROM complaints")
+    status = request.args.get("status")
+
+    if status == "Pending":
+        cursor.execute("SELECT * FROM complaints WHERE status='Pending'")
+    elif status == "Resolved":
+        cursor.execute("SELECT * FROM complaints WHERE status='Resolved'")
+    else:
+        cursor.execute("SELECT * FROM complaints")
+
     complaints = cursor.fetchall()
     return render_template("dashboard.html", complaints=complaints)
+
 
 @app.route("/login")
 def login():
@@ -83,7 +92,10 @@ def resolve_complaint(complaint_id):
 
     return redirect("/admin")
 
-
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/login")
 
 if __name__ == "__main__":
     app.run(debug=True)
