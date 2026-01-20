@@ -52,15 +52,22 @@ def admin_dashboard():
         return redirect("/login")
 
     status = request.args.get("status")
+    search = request.args.get("search")
 
-    if status == "Pending":
-        cursor.execute("SELECT * FROM complaints WHERE status='Pending'")
-    elif status == "Resolved":
-        cursor.execute("SELECT * FROM complaints WHERE status='Resolved'")
-    else:
-        cursor.execute("SELECT * FROM complaints")
+    query = "SELECT * FROM complaints WHERE 1=1"
+    params = []
 
+    if status and status != "all":
+        query += " AND status = %s"
+        params.append(status)
+
+    if search:
+        query += " AND student_name LIKE %s"
+        params.append(f"%{search}%")
+
+    cursor.execute(query, tuple(params))
     complaints = cursor.fetchall()
+
     return render_template("dashboard.html", complaints=complaints)
 
 
