@@ -71,13 +71,20 @@
 
 <div style="width:90%; margin:20px auto;">
     <form method="GET" action="/admin">
-        <label><strong>Filter by Status:</strong></label>
+        <label><strong>Status:</strong></label>
         <select name="status">
             <option value="all">All</option>
             <option value="Pending">Pending</option>
             <option value="Resolved">Resolved</option>
         </select>
-        <button type="submit">Filter</button>
+
+        &nbsp;&nbsp;
+
+        <label><strong>Student Name:</strong></label>
+        <input type="text" name="search" placeholder="Enter name">
+
+        <button type="submit">Apply</button>
     </form>
 </div>
+
 
