@@ -104,5 +104,34 @@ def logout():
     session.clear()
     return redirect("/login")
 
+@app.route("/student")
+def student_login_page():
+    return render_template("student_login.html")
+
+@app.route("/student_login", methods=["POST"])
+def student_login():
+    email = request.form["email"]
+    password = request.form["password"]
+
+    cursor.execute(
+        "SELECT * FROM students WHERE student_email=%s AND student_password=%s",
+        (email, password)
+    )
+    student = cursor.fetchone()
+
+    if student:
+        session["student_logged_in"] = True
+        session["student_email"] = email
+        return redirect("/student_dashboard")
+    else:
+        return "Invalid student credentials"
+    
+@app.route("/student_dashboard")
+def student_dashboard():
+    if not session.get("student_logged_in"):
+        return redirect("/student")
+
+    return "Student login successful"
+
 if __name__ == "__main__":
     app.run(debug=True)
