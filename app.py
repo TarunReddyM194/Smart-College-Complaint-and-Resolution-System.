@@ -131,7 +131,15 @@ def student_dashboard():
     if not session.get("student_logged_in"):
         return redirect("/student")
 
-    return "Student login successful"
+    student_email = session.get("student_email")
+
+    cursor.execute(
+        "SELECT * FROM complaints WHERE student_email = %s",
+        (student_email,)
+    )
+    complaints = cursor.fetchall()
+
+    return render_template("student_dashboard.html", complaints=complaints)
 
 if __name__ == "__main__":
     app.run(debug=True)
