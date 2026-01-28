@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="header">
+    Student Dashboard
+</div>
+
+<div class="table-container">
+    <h3>Your Complaints</h3>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Status</th>
+        </tr>
+
+        {% for complaint in complaints %}
+        <tr>
+            <td>{{ complaint[0] }}</td>
+            <td>{{ complaint[3] }}</td>
+            <td>{{ complaint[4] }}</td>
+            <td>
+                {% if complaint[5] == 'Pending' %}
+                    <span class="status-pending">Pending</span>
+                {% else %}
+                    <span class="status-resolved">Resolved</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+</body>
+</html>
