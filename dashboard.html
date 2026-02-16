@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="header">
+    Admin Dashboard – Complaints
+
+    <form method="GET" action="/logout" style="float:right;">
+        <button style="
+            background:white;
+            color:#4f46e5;
+            border:none;
+            padding:6px 12px;
+            border-radius:5px;
+            cursor:pointer;
+        ">
+            Logout
+        </button>
+    </form>
+</div>
+
+
+<div style="width:90%; margin:20px auto;">
+    <form method="GET" action="/admin">
+        <label><strong>Status:</strong></label>
+        <select name="status">
+            <option value="all">All</option>
+            <option value="Pending">Pending</option>
+            <option value="Resolved">Resolved</option>
+        </select>
+
+        &nbsp;&nbsp;
+
+        <label><strong>Student Name:</strong></label>
+        <input type="text" name="search" placeholder="Enter name">
+
+        <button type="submit">Apply</button>
+    </form>
+</div>
+
+
+<div class="table-container">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Student</th>
+            <th>Email</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+
+        {% for complaint in complaints %}
+        <tr>
+            <td>{{ complaint[0] }}</td>
+            <td>{{ complaint[1] }}</td>
+            <td>{{ complaint[2] }}</td>
+            <td>{{ complaint[3] }}</td>
+            <td>{{ complaint[4] }}</td>
+
+            <td>
+                {% if complaint[5] == 'Pending' %}
+                    <span class="status-pending">Pending</span>
+                {% else %}
+                    <span class="status-resolved">Resolved</span>
+                {% endif %}
+            </td>
+
+            <td>
+                {% if complaint[5] == 'Pending' %}
+                <form method="POST" action="/resolve/{{ complaint[0] }}">
+                    <button class="resolve-btn" type="submit">Resolve</button>
+                </form>
+                {% else %}
+                —
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+</body>
+</html>
