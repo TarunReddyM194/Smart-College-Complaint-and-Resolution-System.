@@ -178,8 +178,23 @@ def admin_dashboard():
     cursor.execute(query, tuple(params))
     complaints = cursor.fetchall()
 
-    return render_template("dashboard.html", complaints=complaints)
+    # COUNT SUMMARY
+    cursor.execute("SELECT COUNT(*) FROM complaints")
+    total_count = cursor.fetchone()[0]
 
+    cursor.execute("SELECT COUNT(*) FROM complaints WHERE status='Pending'")
+    pending_count = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM complaints WHERE status='Resolved'")
+    resolved_count = cursor.fetchone()[0]
+
+    return render_template(
+        "dashboard.html",
+        complaints=complaints,
+        total_count=total_count,
+        pending_count=pending_count,
+        resolved_count=resolved_count
+    )
 
 # ---------------- RESOLVE COMPLAINT ----------------
 @app.route("/resolve/<int:complaint_id>", methods=["POST"])
