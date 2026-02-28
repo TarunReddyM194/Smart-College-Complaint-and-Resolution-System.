@@ -8,22 +8,12 @@
 
 <div class="header">
     Admin Dashboard – Complaints
-
-    <form method="GET" action="/logout" style="float:right;">
-        <button style="
-            background:white;
-            color:#4f46e5;
-            border:none;
-            padding:6px 12px;
-            border-radius:5px;
-            cursor:pointer;
-        ">
-            Logout
-        </button>
-    </form>
+    <a href="/logout" style="float:right;">
+        <button>Logout</button>
+    </a>
 </div>
 
-
+<!-- FILTER SECTION -->
 <div style="width:90%; margin:20px auto;">
     <form method="GET" action="/admin">
         <label><strong>Status:</strong></label>
@@ -42,8 +32,27 @@
     </form>
 </div>
 
+<!-- SUMMARY CARDS -->
+<div style="width:90%; margin:20px auto; display:flex; gap:20px;">
+    <div style="flex:1; background:white; padding:20px; border-radius:8px; text-align:center;">
+        <h4>Total</h4>
+        <h2 style="color:#4f46e5;">{{ total_count }}</h2>
+    </div>
 
-<div class="table-container">
+    <div style="flex:1; background:white; padding:20px; border-radius:8px; text-align:center;">
+        <h4>Pending</h4>
+        <h2 style="color:orange;">{{ pending_count }}</h2>
+    </div>
+
+    <div style="flex:1; background:white; padding:20px; border-radius:8px; text-align:center;">
+        <h4>Resolved</h4>
+        <h2 style="color:green;">{{ resolved_count }}</h2>
+    </div>
+</div>
+
+<!-- TABLE -->
+<div class="table-container" 
+     style="width:95%; margin:20px auto; max-height:500px; overflow-y:auto;">
     <table>
         <tr>
             <th>ID</th>
@@ -65,19 +74,21 @@
 
             <td>
                 {% if complaint[5] == 'Pending' %}
-                    <span class="status-pending">Pending</span>
+                    <span style="color:orange; font-weight:bold;">Pending</span>
                 {% else %}
-                    <span class="status-resolved">Resolved</span>
+                    <span style="color:green; font-weight:bold;">Resolved</span>
                 {% endif %}
             </td>
 
             <td>
                 {% if complaint[5] == 'Pending' %}
                 <form method="POST" action="/resolve/{{ complaint[0] }}">
-                    <button class="resolve-btn" type="submit">Resolve</button>
+                    <button style="background:#28a745; color:white; border:none; padding:6px 12px; border-radius:5px;">
+                        Resolve
+                    </button>
                 </form>
                 {% else %}
-                —
+                    —
                 {% endif %}
             </td>
         </tr>
