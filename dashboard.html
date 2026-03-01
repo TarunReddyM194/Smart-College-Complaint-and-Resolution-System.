@@ -6,10 +6,20 @@
 </head>
 <body>
 
+<!-- HEADER -->
 <div class="header">
     Admin Dashboard – Complaints
     <a href="/logout" style="float:right;">
-        <button>Logout</button>
+        <button style="
+            background:white;
+            color:#4f46e5;
+            border:none;
+            padding:6px 12px;
+            border-radius:5px;
+            cursor:pointer;
+        ">
+            Logout
+        </button>
     </a>
 </div>
 
@@ -35,7 +45,7 @@
 <!-- SUMMARY CARDS -->
 <div style="width:90%; margin:20px auto; display:flex; gap:20px;">
     <div style="flex:1; background:white; padding:20px; border-radius:8px; text-align:center;">
-        <h4>Total</h4>
+        <h4>Total Complaints</h4>
         <h2 style="color:#4f46e5;">{{ total_count }}</h2>
     </div>
 
@@ -50,9 +60,10 @@
     </div>
 </div>
 
-<!-- TABLE -->
-<div class="table-container" 
-     style="width:95%; margin:20px auto; max-height:500px; overflow-y:auto;">
+<!-- TABLE SECTION -->
+<div class="table-container"
+     style="width:95%; margin:20px auto; max-height:500px; overflow-y:auto; overflow-x:hidden; background:white; padding:20px; border-radius:8px;">
+
     <table>
         <tr>
             <th>ID</th>
@@ -64,35 +75,44 @@
             <th>Action</th>
         </tr>
 
-        {% for complaint in complaints %}
-        <tr>
-            <td>{{ complaint[0] }}</td>
-            <td>{{ complaint[1] }}</td>
-            <td>{{ complaint[2] }}</td>
-            <td>{{ complaint[3] }}</td>
-            <td>{{ complaint[4] }}</td>
+        {% if complaints %}
+            {% for complaint in complaints %}
+            <tr>
+                <td>{{ complaint[0] }}</td>
+                <td>{{ complaint[1] }}</td>
+                <td>{{ complaint[2] }}</td>
+                <td>{{ complaint[3] }}</td>
+                <td>{{ complaint[4] }}</td>
 
-            <td>
-                {% if complaint[5] == 'Pending' %}
-                    <span style="color:orange; font-weight:bold;">Pending</span>
-                {% else %}
-                    <span style="color:green; font-weight:bold;">Resolved</span>
-                {% endif %}
-            </td>
+                <td>
+                    {% if complaint[5] == 'Pending' %}
+                        <span style="color:orange; font-weight:bold;">Pending</span>
+                    {% else %}
+                        <span style="color:green; font-weight:bold;">Resolved</span>
+                    {% endif %}
+                </td>
 
-            <td>
-                {% if complaint[5] == 'Pending' %}
-                <form method="POST" action="/resolve/{{ complaint[0] }}">
-                    <button style="background:#28a745; color:white; border:none; padding:6px 12px; border-radius:5px;">
-                        Resolve
-                    </button>
-                </form>
-                {% else %}
-                    —
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
+                <td>
+                    {% if complaint[5] == 'Pending' %}
+                        <form method="POST" action="/resolve/{{ complaint[0] }}">
+                            <button style="background:#28a745; color:white; border:none; padding:6px 12px; border-radius:5px;">
+                                Resolve
+                            </button>
+                        </form>
+                    {% else %}
+                        —
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="7" style="text-align:center; padding:20px; color:gray;">
+                    No complaints found.
+                </td>
+            </tr>
+        {% endif %}
+
     </table>
 </div>
 
