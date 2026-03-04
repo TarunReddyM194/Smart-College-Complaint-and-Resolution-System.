@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+</div>
+
+<footer style="
+text-align:center;
+padding:15px;
+margin-top:40px;
+background:#4f46e5;
+color:white;
+font-size:14px;">
+© 2026 Smart College Complaint System | Developed by Tarun Reddy
+</footer>
+
+</body>
+</html>
+
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+<body style="display:block;">
+
+<h2 style="text-align:center; color:white; margin-top:40px;">
+    Student Dashboard
+</h2>
+
+<div class="container" style="width:60%; margin:40px auto;">
+    <h3>Your Complaints</h3>
+
+    <table width="100%" cellpadding="10">
+        <tr style="background-color:#e2e6f3;">
+            <th>ID</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Status</th>
+        </tr>
+
+        {% for complaint in complaints %}
+        <tr>
+            <td>{{ complaint[0] }}</td>
+            <td>{{ complaint[3] }}</td>
+            <td>{{ complaint[4] }}</td>
+            <td>
+                {% if complaint[5] == 'Resolved' %}
+                    <span style="color:green; font-weight:bold;">Resolved</span>
+                {% else %}
+                    <span style="color:orange; font-weight:bold;">Pending</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div style="width:60%; margin:0 auto 60px auto; display:flex; justify-content:space-between;">
+    
+    <a href="/raise_complaint">
+        <button style="width:220px;">Raise New Complaint</button>
+    </a>
+
+    <a href="/logout">
+        <button style="background-color:gray; width:220px;">Logout</button>
+    </a>
+
+</div>
+
+</body>
+</html>
