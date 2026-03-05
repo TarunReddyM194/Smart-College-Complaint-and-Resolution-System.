@@ -41,20 +41,25 @@ font-size:14px;">
 <!-- FILTER SECTION -->
 <div style="width:90%; margin:20px auto;">
     <form method="GET" action="/admin">
-        <label><strong>Status:</strong></label>
-        <select name="status">
-            <option value="all">All</option>
-            <option value="Pending">Pending</option>
-            <option value="Resolved">Resolved</option>
-        </select>
+    <label><strong>Status:</strong></label>
+    <select name="status">
+        <option value="all">All</option>
+        <option value="Pending">Pending</option>
+        <option value="Resolved">Resolved</option>
+    </select>
 
-        &nbsp;&nbsp;
+    &nbsp;&nbsp;
 
-        <label><strong>Student Name:</strong></label>
-        <input type="text" name="search" placeholder="Enter name">
+    <label><strong>Student Name:</strong></label>
+    <input type="text" name="search" placeholder="Enter name">
 
-        <button type="submit">Apply</button>
-    </form>
+    <button type="submit">Apply</button>
+
+    <a href="/admin">
+        <button type="button">Clear</button>
+    </a>
+</form>
+       
 </div>
 
 <!-- SUMMARY CARDS -->
