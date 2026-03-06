@@ -102,7 +102,9 @@ font-size:14px;">
                 <td>{{ complaint[1] }}</td>
                 <td>{{ complaint[2] }}</td>
                 <td>{{ complaint[3] }}</td>
-                <td>{{ complaint[4] }}</td>
+                <td style="max-width:300px;">
+{{ complaint[4] }}
+</td>
 
                 <td>
                     {% if complaint[5] == 'Pending' %}
