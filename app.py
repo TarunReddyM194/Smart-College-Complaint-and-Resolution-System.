@@ -89,6 +89,24 @@ def student_dashboard():
     )
     complaints = cursor.fetchall()
 
+    total_complaints = len(complaints)
+
+    return render_template(
+        "student_dashboard.html",
+        complaints=complaints,
+        total_complaints=total_complaints
+    )
+    if not session.get("student_logged_in"):
+        return redirect("/student")
+
+    student_email = session.get("student_email")
+
+    cursor.execute(
+        "SELECT * FROM complaints WHERE student_email = %s",
+        (student_email,)
+    )
+    complaints = cursor.fetchall()
+
     return render_template("student_dashboard.html", complaints=complaints)
 
 # ---------------- RAISE COMPLAINT PAGE ----------------
