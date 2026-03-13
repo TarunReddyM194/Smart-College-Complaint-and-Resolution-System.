@@ -18,13 +18,17 @@ I selected this project to learn how real-time applications work using Flask and
 ## Users
 - Student
 - Admin
-  
+
   
 ## Features
-- Student can register complaints
-- Admin can view complaints
-- Complaint status tracking
-- Simple and user-friendly interface
+
+- Student Registration and Login
+- Raise Complaint
+- Student Dashboard to track complaints
+- Admin Dashboard to manage complaints
+- Complaint Status (Pending / Resolved)
+- Complaint Summary (Total / Pending / Resolved)
+- Complaint Filtering by Status and Student Name
   
 
 ## Technologies Used
