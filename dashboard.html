@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 </div>
 
+<script>
+const container = document.querySelector('.table-container');
+
+container.addEventListener('wheel', function(e){
+    if(e.deltaY != 0){
+        e.preventDefault();
+        container.scrollLeft += e.deltaY;
+    }
+});
+</script>
+
 <footer style="
 text-align:center;
 padding:15px;
