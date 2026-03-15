@@ -52,10 +52,22 @@ http://127.0.0.1:5000
 
 
 ## Project Structure
-app.py
-templates/
-static/css/
-database/
+
+smart-college-complaint-system/
+│
+├── app.py
+├── README.md
+│
+├── templates/
+│   ├── home.html
+│   ├── dashboard.html
+│   ├── student_dashboard.html
+│   ├── student_login.html
+│   ├── student_register.html
+│
+├── static/
+│   └── css/
+│       └── style.css
 
 
 ## Learning Outcome
