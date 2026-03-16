@@ -82,29 +82,16 @@ def student_dashboard():
         return redirect("/student")
 
     student_email = session.get("student_email")
+    search = request.args.get("search")
 
-    cursor.execute(
-        "SELECT * FROM complaints WHERE student_email = %s",
-        (student_email,)
-    )
-    complaints = cursor.fetchall()
+    query = "SELECT * FROM complaints WHERE student_email = %s"
+    params = [student_email]
 
-    total_complaints = len(complaints)
+    if search:
+        query += " AND complaint_description LIKE %s"
+        params.append(f"%{search}%")
 
-    return render_template(
-        "student_dashboard.html",
-        complaints=complaints,
-        total_complaints=total_complaints
-    )
-    if not session.get("student_logged_in"):
-        return redirect("/student")
-
-    student_email = session.get("student_email")
-
-    cursor.execute(
-        "SELECT * FROM complaints WHERE student_email = %s",
-        (student_email,)
-    )
+    cursor.execute(query, tuple(params))
     complaints = cursor.fetchall()
 
     return render_template("student_dashboard.html", complaints=complaints)
