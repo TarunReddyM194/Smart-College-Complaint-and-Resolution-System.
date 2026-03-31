@@ -82,4 +82,9 @@ This project is developed as part of the MCA final year curriculum.
 
 First and Secind Review Successfully Completed in College.
 
+## Upcoming Features
+
+- Complaint Type Filter
+- Export to CSV
+- Dashboard Analytics.
 
