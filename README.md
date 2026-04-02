@@ -1,4 +1,4 @@
-# Smart College Complaint and Resolution System
+## Smart College Complaint and Resolution System
 
 
 ## Project Description
@@ -87,4 +87,11 @@ First and Secind Review Successfully Completed in College.
 - Complaint Type Filter
 - Export to CSV
 - Dashboard Analytics.
+
+
+## Future Enhancements
+- Email notification system
+- Complaint analytics dashboard
+- Export complaints to CSV
+- Mobile responsive UI
 
